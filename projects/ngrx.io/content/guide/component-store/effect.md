@@ -58,13 +58,12 @@ The `getMovie` effect could then be used within a component.
   // ❗️MoviesStore is provided higher up the component tree
 })
 export class MovieComponent {
-  movie$: Observable&lt;Movie&gt;;
+  readonly movie$: Observable&lt;Movie&gt; = this.moviesStore.selectMovie(value);
 
   @Input()
   set movieId(value: string) {
     // calls effect with value. 👇 Notice it's a single string value.
     this.moviesStore.getMovie(value);
-    this.movie$ = this.moviesStore.selectMovie(value);
   }
 
   constructor(private readonly moviesStore: MoviesStore) {}
